@@ -1,9 +1,3 @@
----
-layout: page
-title: Kipiki
-tagline: Dan's site of knowledge
----
-
 # This site is WIP, just as a heads up, will take the banner down when its been transitioned to live.
 
 # Welcome to Kipiki
