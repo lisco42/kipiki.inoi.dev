@@ -11,11 +11,13 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 * [Odroid Xu4 PortaLAN](/pages/projects/xu4portalan.md) - More powerful and featureful version of the PortaPi router, fun build, works great, super popular
 
 ## Presentations and Knowledge pages
+
 ### Things I've presented on (projects also parts of this):
 * [Crypto Currencies](/pages/kb/cryptocurrencies.md) - Presentation on the general concepts of Crypto Currencies
 * [Lan Party Resources](/pages/kb/lanpartyresources.md) - Resources useful for lan parties like game servers, caching services, and other resources
 * [Scripting Presentation](/pages/kb/scriptingpresentation.md) - Script from my scripting presentation ax JaxLUG
 * [Linux Filesystems](/pages/kb/linuxfilesystems.md) - Presentation on linux filesystems, raid, encryption, ect
+
 ### Good general knowledge pages:
 * [Useful Tools](/pages/kb/usefultools.md) - Tools that are super useful but may not get the lime-light
 * [File Distribution](/pages/kb/filedistribution.md) - Methods of distributing files, building fileservers, distribution nodes, ect
