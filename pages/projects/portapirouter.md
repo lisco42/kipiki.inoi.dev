@@ -27,15 +27,15 @@ This document's goal is to put together a full knowledge dump from beginning to 
 * Raspberry Pi 3 B+ Wireless -- alternate Raspberry Pi Zero W
 * Sandisk Ultra 32GB - I suggest using Sandisk Ultra or Extreme cards as they have error correcting, cheap SD cards usually die in short order being used as root for a computer.
 * Battery - Must be able to supply 2+Amps over 5V, short cables preferred to reduce any voltage loss.
- * Tested batteries:
-  * Anker 20000 mAh battery that can put out 4A - works for pi3 + switch
-  * Poseidon 10000 mAh battery 2.4 A and 1A ports - works for pi3 (on 2.4 port) and should work for switch (1A port)
-  * Anker 5000 mAh battery that has one port but 2A output - pi3 is able to boot but under any load as router it crashes
- * More reading on power consumption: https://www.pidramble.com/wiki/benchmarks/power-consumption
- * Testing with just the pi on the 20000mah battery yeilded over 2 days of pi at idle, which will be significantly less with the switch and higher load, hoping for around 6+ hours.
+  * Tested batteries:
+    * Anker 20000 mAh battery that can put out 4A - works for pi3 + switch
+    * Poseidon 10000 mAh battery 2.4 A and 1A ports - works for pi3 (on 2.4 port) and should work for switch (1A port)
+    * Anker 5000 mAh battery that has one port but 2A output - pi3 is able to boot but under any load as router it crashes
+  * More reading on power consumption: https://www.pidramble.com/wiki/benchmarks/power-consumption
+  * Testing with just the pi on the 20000mah battery yeilded over 2 days of pi at idle, which will be significantly less with the switch and higher load, hoping for around 6+ hours.
 * Wireless nic for making access point, tested with:
- * Edimax nano EW-7811Un (Realtek RTL8188CUS)
- * TP-Link TL-WN772N (more powerful for longer range access point)
+  * Edimax nano EW-7811Un (Realtek RTL8188CUS)
+  * TP-Link TL-WN772N (more powerful for longer range access point)
 * Switch that can run off 5v - For me a Trendnet TEG-S5g then using a direct usb -> 2.1mm barrel connector to power
 * Short Ethernet cable
 * Short USB cable (Pi Power)
