@@ -542,3 +542,72 @@ COMMIT
 
 After reboot you can check to make sure your rules are active: 
 
+```bash
+root@rpi:~# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             10.1.10.1           
+REJECT     all  --  anywhere             10.1.10.0/24         reject-with icmp-port-unreachable
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             10.1.10.1           
+DROP       all  --  anywhere             10.1.10.0/24        
+root@rpi:~# iptables -t nat -L
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+MASQUERADE  all  --  anywhere             anywhere
+```
+
+## Caretaking/after build
+
+Items covered in this section:
+
+* Updating the installation
+* Saving/restoring image for backup or if intrusion concern
+
+**Updating the installation**
+
+Make sure you update the install on occasion.
+
+This can be done pretty simply with the debian install:
+
+```bash
+root@rpi:~# apt update
+...
+root@rpi:~# apt upgrade
+```
+
+You may need to reboot if the system updates its kernel (unlikely with the pi)
+
+**Saving / Restoring the image**
+
+Saving and restoring the image are pretty easy with a pi and linux.
+
+**Backup image**
+
+* insert card to another linux machine (probably using a usb reader)
+* use dd to create an image, optionally use gzip to compress the image (if you have a 32GB card, and are using 2GB, the raw image will be 32GB, but compressed would be 2GB or less)
+* Compressed image: dd if=/dev/<sdcard root device> bs=4M | gzip -c > ~/rpibackup.gz
+* Uncompressed image: dd if=/dev/<sdcard root device> of=~/rpibackup.img bs=4M
+
+**Restore image**
+
+* Compressed image: gunzip -c ~/rpibackup.gz | dd of=/dev/<sdcard root device> bs=4M
+* Uncompressed image: dd if=~/rpibackup.img of=/dev/<sdcard root device> bs=4M
+
+## Final Thoughts
+
+I hope this has been helpful to you, in my experiments the raspberry pi works pretty well, but it does have its faults. I have had some issues but nothing major switching a usb wireless out or reducing load wouldnt help with. My next project will be doing the same thing, but using an odroid xu4 for the additional power it has as well as the usb3 and gigabit ethernet. 
