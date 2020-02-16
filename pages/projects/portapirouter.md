@@ -129,44 +129,44 @@ pi@raspberrypi:~ $ sudo raspi-config
 To navigate: use the arrow keys and tab What to change using the menu (and what each option does):
 
 * Localization Options
- * Change Locale (This changes the default/supported languages of the system, UK by default for raspbian)
-  * Remove en_GB.UTF-8 UTF-8
-  * Add en_US.UTF-8 UTF-8 (or whatever other lang/countries you want)
- * Change Timezone (setting up your local timezone)
-  * For me it was US -> Eastern
- * Change Keyboard Layout (changes the keyboard layout (In US the issue is the | sends a ~ with 105 intl, you need to change to 104))
-  * Change Generic 105-key (intl) PC to Generic 104-key PC
-  * Keyboard Layout: (default English(UK), choose other)
-  * English (US)
-  * English (US)
-  * The default for the keyboard layout
-  * No compose key
- * Change Wi-Fi Country (this affects what channels you are allowed to use)
-  * Select US United States
+  * Change Locale (This changes the default/supported languages of the system, UK by default for raspbian)
+    * Remove en_GB.UTF-8 UTF-8
+    * Add en_US.UTF-8 UTF-8 (or whatever other lang/countries you want)
+  * Change Timezone (setting up your local timezone)
+    * For me it was US -> Eastern
+  * Change Keyboard Layout (changes the keyboard layout (In US the issue is the | sends a ~ with 105 intl, you need to change to 104))
+    * Change Generic 105-key (intl) PC to Generic 104-key PC
+    * Keyboard Layout: (default English(UK), choose other)
+    * English (US)
+    * English (US)
+    * The default for the keyboard layout
+    * No compose key
+  * Change Wi-Fi Country (this affects what channels you are allowed to use)
+    * Select US United States
 * Advanced Options
- * Memory split
-  * I chose 16 here since we are going to be running this headless most of the time, this gives the OS the most memory and provides better performance for our purposes
+  * Memory split
+    * I chose 16 here since we are going to be running this headless most of the time, this gives the OS the most memory and provides better performance for our purposes
 * Finish
 
 Now reboot the machine, then when it comes back up, set your password and hostname.
 The reason we do the localization first, is when your putting in your password/hostname, the keyboard layout may be different, and if you change it with the wrong layout, then change the layout, you may not be able to log in (not from personal experience or anything).
 
 * If you have locked yourself out of the pi:
- * Shut off the pi
- * Pull the microsd card, load into your linux box
- * mount partition 2 (IE mount /dev/sdb2 /mnt)
- * edit the /mnt/etc/shadow file, find the 'pi' entry, remove the second field (fields are denoted with a :)
- * unmount the media, put back into the pi, boot the pi
- * pi user will no longer have a password, set a new password using `passwd` or the method below.
+  * Shut off the pi
+  * Pull the microsd card, load into your linux box
+  * mount partition 2 (IE mount /dev/sdb2 /mnt)
+  * edit the /mnt/etc/shadow file, find the 'pi' entry, remove the second field (fields are denoted with a :)
+  * unmount the media, put back into the pi, boot the pi
+  * pi user will no longer have a password, set a new password using `passwd` or the method below.
 
  ```bash
  pi@raspberrypi:~ $ sudo raspi-config
  ```
 
 * User password
- * This simply runs (as root) `passwd pi`
+  * This simply runs (as root) `passwd pi`
 * Hostname
- * This changes the /etc/hostname and /etc/hosts entries to rename the machine
+  * This changes the /etc/hostname and /etc/hosts entries to rename the machine
 
 **Setting up sshd**
 
