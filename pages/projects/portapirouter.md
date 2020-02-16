@@ -134,7 +134,7 @@ To navigate: use the arrow keys and tab What to change using the menu (and what 
     * Add en_US.UTF-8 UTF-8 (or whatever other lang/countries you want)
   * Change Timezone (setting up your local timezone)
     * For me it was US -> Eastern
-  * Change Keyboard Layout (changes the keyboard layout (In US the issue is the | sends a ~ with 105 intl, you need to change to 104))
+  * Change Keyboard Layout (changes the keyboard layout (In US the issue is the ``|`` sends a ~ with 105 intl, you need to change to 104))
     * Change Generic 105-key (intl) PC to Generic 104-key PC
     * Keyboard Layout: (default English(UK), choose other)
     * English (US)
