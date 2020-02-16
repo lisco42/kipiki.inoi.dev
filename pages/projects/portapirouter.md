@@ -600,13 +600,13 @@ Saving and restoring the image are pretty easy with a pi and linux.
 
 * insert card to another linux machine (probably using a usb reader)
 * use dd to create an image, optionally use gzip to compress the image (if you have a 32GB card, and are using 2GB, the raw image will be 32GB, but compressed would be 2GB or less)
-* Compressed image: dd if=/dev/<sdcard root device> bs=4M | gzip -c > ~/rpibackup.gz
-* Uncompressed image: dd if=/dev/<sdcard root device> of=~/rpibackup.img bs=4M
+* Compressed image: ``dd if=/dev/<sdcard root device> bs=4M | gzip -c > ~/rpibackup.gz``
+* Uncompressed image: ``dd if=/dev/<sdcard root device> of=~/rpibackup.img bs=4M``
 
 **Restore image**
 
-* Compressed image: gunzip -c ~/rpibackup.gz | dd of=/dev/<sdcard root device> bs=4M
-* Uncompressed image: dd if=~/rpibackup.img of=/dev/<sdcard root device> bs=4M
+* Compressed image: ``gunzip -c ~/rpibackup.gz | dd of=/dev/<sdcard root device> bs=4M``
+* Uncompressed image: ``dd if=~/rpibackup.img of=/dev/<sdcard root device> bs=4M``
 
 ## Final Thoughts
 
