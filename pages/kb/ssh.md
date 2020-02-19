@@ -284,8 +284,63 @@ PAM Modules:
 * allows for authentication manipulation including LDAP/2FA/other mitigations
 
 ## Dynamic Proxy and Port Forwarding
-### Dynamic Socks Proxy
-### Static Port Forwarding
+* Dynamic Socks Proxy
+Dynamic Socks proxying is great!  You open a single tunnel, point your socks-capable product like firefox at it, and boom, your traffic pops out the endpoint, even if thats a few endpoints down because of jumphost
+```bash
+user01@lug01:~$ ssh -D 8080 172.16.54.2
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Last login: Wed Feb 19 17:02:37 2020 from 172.16.54.1
+user01@lug02:~$
+```
+And you can now see that you have a local port ready for socks clients:
+```bash
+user01@lug01:~$ netstat -anl | grep 8080
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN
+tcp6       0      0 ::1:8080                :::*                    LISTEN
+```
+
+* Static Port Forwarding
+
+Forwarding ports is very powerful and useful, have an RDP machine you need to get to but only have ssh access to an external server for safety, you can do that, have insecure webservers in a secure network, you can access them.  This is a 1:1 relationship whereas the above socks dynamic proxying is more robust, but less services can use it (they need to support socks)
+
+Setting up the initial connection, for instance this would forward traffic from 8443 on your local machine (lug01) to the remote host 8.8.8.8 (google dns) port 443
+```bash
+user01@lug01:~$ ssh -L 8443:8.8.8.8:443 172.16.54.2
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Last login: Wed Feb 19 16:54:57 2020 from 172.16.54.1
+user01@lug02:~$
+```
+
+And showing us that we get to google dns webserver when we do a curl against it:
+```bash
+user01@lug01:~$ curl -k https://localhost:8443
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>302 Moved</TITLE></HEAD><BODY>
+<H1>302 Moved</H1>
+The document has moved
+<A HREF="https://www.google.com/">here</A>.
+</BODY></HTML>
+```
+
+* X11 Forwarding
+![X11 Forwarding](/kb_images/x11_forwarding.jpg)
+
 
 ## Jumphost
 
