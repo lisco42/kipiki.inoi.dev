@@ -21,7 +21,7 @@ Server identification keys are important for preventing man in the middle attack
 
 * Example initial connection, followed by a subsuquent connection showing the key did not change:
 
-```bash
+```
 user01@lug01:~$ ssh 172.16.54.2
 The authenticity of host '172.16.54.2 (172.16.54.2)' can't be established.
 ECDSA key fingerprint is SHA256:VjBWSuFHiK2AHtld34YAnfukXaX4twQgwqCoKV0siUo.
@@ -55,7 +55,7 @@ user01@lug02:~$
 * If you have not rebuilt the server (and not transferred the key), and are using a client that has the key already in place, and see the following error... **BEWARE**
   * For this example I've removed the keys on lug02, and regenerated them as such:
 
-```bash
+```
 root@lug02:/etc/ssh# rm ssh_host_*
 root@lug02:/etc/ssh# ls
 moduli  ssh_config  sshd_config
@@ -70,7 +70,7 @@ Creating SSH2 ED25519 key; this may take some time ...
 
 * On reconnecting, the client errors with the following and should be heeded:
 
-```bash
+```
 user01@lug01:~$ ssh 172.16.54.2
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
@@ -91,7 +91,7 @@ Host key verification failed.
 
 * Clearing it (from like a host rebuild or something) is pretty simple, just follow the directions or remove the line from .ssh/known_hosts:
 
-```bash
+```
 user01@lug01:~$ ssh-keygen -f "/home/user01/.ssh/known_hosts" -R "172.16.54.2"
 # Host 172.16.54.2 found: line 1
 /home/user01/.ssh/known_hosts updated.
@@ -100,14 +100,14 @@ Original contents retained as /home/user01/.ssh/known_hosts.old
 
 * This is the key from the client side (lug01)
 
-```bash
+```
 user01@lug01:~$ cat .ssh/known_hosts
 |1|gJ8Ievpj9e7A4C/MCV84j5FPrgM=|bgP//KsWhRs/f6VwmUbtE75Mzho= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0=
 ```
 
 * Here is the key from the server side (lug02) - public then private (this should go without saying, but private key should never be shared, this is an example machine)
 
-```bash
+```
 root@lug02:/etc/ssh# cat ssh_host_ecdsa_key.pub
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0= root@lug02
 root@lug02:/etc/ssh# cat ssh_host_ecdsa_key
@@ -126,7 +126,7 @@ AwQFBg==
 Building keys is a great way to stay secure, and not have to worry about someone getting into your system with compromised username and password combos (more on configuring your server in this way later)
 * First you need to generate your ssh key on a client, this is transferrable, should have a password, and the private key should be kept... private:
 
-```bash
+```
 user01@lug01:~$ ssh-keygen -b 4096
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/user01/.ssh/id_rsa):
@@ -157,7 +157,7 @@ The key's randomart image is:
 
 * Pushing the key to a remote server and using it (this key has no password, as an example)
 
-```bash
+```
 user01@lug01:~$ ssh-copy-id 172.16.54.2
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/user01/.ssh/id_rsa.pub"
 The authenticity of host '172.16.54.2 (172.16.54.2)' can't be established.
@@ -193,7 +193,7 @@ The 'Message of the Day' or MOTD is held at /etc/motd, it with /etc/issue are ge
 
 * Putting in a custom MOTD is pretty simple, as root just modify /etc/motd or /etc/issue and you'll get your custom info on login, if we wanted to provide the user with a fun greeting on login, you could do this:
 
-```bash
+```
 user01@lug02:~$ cowsay "Hello user, have a nice day!"
  ______________________________
 < Hello user, have a nice day! >
@@ -230,7 +230,7 @@ Last login: Wed Feb 19 14:07:31 2020 from 172.16.54.1
 user01@lug02:~$
 ```
 
-## Securing
+## Securing SSH_Daemon
 
 A few config options:
 * Disabling root login
@@ -285,8 +285,12 @@ PAM Modules:
 
 ## Dynamic Proxy and Port Forwarding
 * Dynamic Socks Proxy
+
 Dynamic Socks proxying is great!  You open a single tunnel, point your socks-capable product like firefox at it, and boom, your traffic pops out the endpoint, even if thats a few endpoints down because of jumphost
-```bash
+
+The -D flag tells ssh to open a socks 4 or 5 tunnel to the endpoint
+
+```
 user01@lug01:~$ ssh -D 8080 172.16.54.2
 Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
  ______________________________
@@ -300,8 +304,10 @@ Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
 Last login: Wed Feb 19 17:02:37 2020 from 172.16.54.1
 user01@lug02:~$
 ```
+
 And you can now see that you have a local port ready for socks clients:
-```bash
+
+```
 user01@lug01:~$ netstat -anl | grep 8080
 tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN
 tcp6       0      0 ::1:8080                :::*                    LISTEN
@@ -311,8 +317,11 @@ tcp6       0      0 ::1:8080                :::*                    LISTEN
 
 Forwarding ports is very powerful and useful, have an RDP machine you need to get to but only have ssh access to an external server for safety, you can do that, have insecure webservers in a secure network, you can access them.  This is a 1:1 relationship whereas the above socks dynamic proxying is more robust, but less services can use it (they need to support socks)
 
+the -L flag tells ssh to open a local socket to a remote socket thus creating a 'tunnel'
+
 Setting up the initial connection, for instance this would forward traffic from 8443 on your local machine (lug01) to the remote host 8.8.8.8 (google dns) port 443
-```bash
+
+```
 user01@lug01:~$ ssh -L 8443:8.8.8.8:443 172.16.54.2
 Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
  ______________________________
@@ -328,7 +337,8 @@ user01@lug02:~$
 ```
 
 And showing us that we get to google dns webserver when we do a curl against it:
-```bash
+
+```
 user01@lug01:~$ curl -k https://localhost:8443
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
 <TITLE>302 Moved</TITLE></HEAD><BODY>
@@ -339,10 +349,78 @@ The document has moved
 ```
 
 * X11 Forwarding
+
+-X and -Y enable ssh forwarding for your connection
+
 ![X11 Forwarding](/kb_images/x11_forwarding.jpg)
 
-
 ## Jumphost
+
+Jumphost is a fantastic way to get into networks that have deep alignments.  Paired with keys and master connections you can be pretty safe by hopping in one or multiple layers of networks.
+
+The -J option is for jumphost or proxyjump, and is a shortcut to an older, more difficult method of doing proxy jumps.  You can add one or more hosts by doing a comma seperated list.
+
+Here is an example where (only using two servers but you get it):
+
+The user is going from: user01 (local, lug01) -> user01 (remote, lug02) -> user01 (remote, lug01) -> jsmith (remote, lug02)
+
+```
+user01@lug01:~$ ssh -J 172.16.54.2,172.16.54.1 jsmith@172.16.54.2
+user01@172.16.54.1's password:
+jsmith@172.16.54.2's password:
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Last login: Wed Feb 19 17:15:46 2020 from 172.16.54.1
+```
+
+## Master connections
+
+## User setup
+
+* User switching
+
+You can be whoever you want to be, within reason, if you're jack on your system, but your jsmith on the remote system, you can change your user to match
+
+To do this, you can use user@server or the -l (lowercase L) flag and the remote name
+
+```
+user01@lug01:~$ ssh jsmith@172.16.54.2
+jsmith@172.16.54.2's password:
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+$
+Connection to 172.16.54.2 closed.
+user01@lug01:~$ ssh 172.16.54.2 -l jsmith
+jsmith@172.16.54.2's password:
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Last login: Wed Feb 19 17:15:17 2020 from 172.16.54.1
+```
+
+* Keepalive
+
+## SSH client config
 
 ## Links
 * YubiKey 2fa:
