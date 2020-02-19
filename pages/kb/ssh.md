@@ -20,6 +20,7 @@ Server identification keys are important for preventing man in the middle attack
 * Server keys can be transferred (with root access) between servers, if for instance dealing with a round robin ssh bastion cluster, or rebuilding a server
 
 * Example initial connection, followed by a subsuquent connection showing the key did not change:
+
 ```bash
 user01@lug01:~$ ssh 172.16.54.2
 The authenticity of host '172.16.54.2 (172.16.54.2)' can't be established.
@@ -50,8 +51,10 @@ permitted by applicable law.
 Last login: Wed Feb 19 12:36:15 2020 from 172.16.54.1
 user01@lug02:~$
 ```
+
 * If you have not rebuilt the server (and not transferred the key), and are using a client that has the key already in place, and see the following error... **BEWARE**
   * For this example I've removed the keys on lug02, and regenerated them as such:
+
 ```bash
 root@lug02:/etc/ssh# rm ssh_host_*
 root@lug02:/etc/ssh# ls
@@ -64,7 +67,9 @@ Creating SSH2 ECDSA key; this may take some time ...
 Creating SSH2 ED25519 key; this may take some time ...
 256 SHA256:2M+TmQuKrc6C5WNg/yVsQLLnGzXBHsSLj7Gsr7cWqqs root@lug02 (ED25519)
 ```
+
 * On reconnecting, the client errors with the following and should be heeded:
+
 ```bash
 user01@lug01:~$ ssh 172.16.54.2
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -83,19 +88,25 @@ Offending ECDSA key in /home/user01/.ssh/known_hosts:1
 ECDSA host key for 172.16.54.2 has changed and you have requested strict checking.
 Host key verification failed.
 ```
+
 * Clearing it (from like a host rebuild or something) is pretty simple, just follow the directions or remove the line from .ssh/known_hosts:
+
 ```bash
 user01@lug01:~$ ssh-keygen -f "/home/user01/.ssh/known_hosts" -R "172.16.54.2"
 # Host 172.16.54.2 found: line 1
 /home/user01/.ssh/known_hosts updated.
 Original contents retained as /home/user01/.ssh/known_hosts.old
 ```
+
 * This is the key from the client side (lug01)
+
 ```bash
 user01@lug01:~$ cat .ssh/known_hosts
 |1|gJ8Ievpj9e7A4C/MCV84j5FPrgM=|bgP//KsWhRs/f6VwmUbtE75Mzho= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0=
 ```
+
 * Here is the key from the server side (lug02) - public then private (this should go without saying, but private key should never be shared, this is an example machine)
+
 ```bash
 root@lug02:/etc/ssh# cat ssh_host_ecdsa_key.pub
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0= root@lug02
@@ -114,6 +125,7 @@ AwQFBg==
 ### User identification keys
 Building keys is a great way to stay secure, and not have to worry about someone getting into your system with compromised username and password combos (more on configuring your server in this way later)
 * First you need to generate your ssh key on a client, this is transferrable, should have a password, and the private key should be kept... private:
+
 ```bash
 user01@lug01:~$ ssh-keygen -b 4096
 Generating public/private rsa key pair.
@@ -137,12 +149,14 @@ The key's randomart image is:
 |                 |
 +----[SHA256]-----+
 ```
+
 * After you have created your client key, you can then push the public part of that key to servers you have access to and enjoy more-secure access
   * This action relies on your having password access to the remote server, using a key helps security in two ways
     * A key will protect your password from MITM attacks since it is based on cryptographic signing
     * If the server is, after you place the key on it, reconfigured to only accept key access, no password can be used to log in
 
 * Pushing the key to a remote server and using it (this key has no password, as an example)
+
 ```bash
 user01@lug01:~$ ssh-copy-id 172.16.54.2
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/user01/.ssh/id_rsa.pub"
@@ -178,6 +192,7 @@ The 'Message of the Day' or MOTD is held at /etc/motd, it with /etc/issue are ge
 * Can put in fun little things to entertain yourself
 
 * Putting in a custom MOTD is pretty simple, as root just modify /etc/motd or /etc/issue and you'll get your custom info on login, if we wanted to provide the user with a fun greeting on login, you could do this:
+
 ```bash
 user01@lug02:~$ cowsay "Hello user, have a nice day!"
  ______________________________
@@ -225,6 +240,7 @@ A few config options:
 * Disable password login
 * Use strict mode
 * Ciphers
+
 ```bash
 # Disabling root login, always a good measure, only allows for root to log on physically to the box
 PermitRootLogin no
@@ -246,6 +262,7 @@ MACs hmac-sha2-512
 
 Login hammering mitigation: 
 * fail2ban
+
 ```bash
 # Fail2ban stops server hammering by watching the authlogs and if triggered, will initiate mitigations based on the linux firewall system.  The default debian config for jails.conf includes ssh (below) but if you want more restrictive settings you can modify them.
 
