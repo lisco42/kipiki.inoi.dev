@@ -244,7 +244,8 @@ A few config options:
 ```bash
 # Disabling root login, always a good measure, only allows for root to log on physically to the box
 PermitRootLogin no
-# Alternate port setup (protects against mindless bots, but not usually real attacks)
+# Alternate port setup (protects against mindless bots, but not usually real attacks), you can even set it up for 
+# multi-port so you can use one port internally and others externally
 Port 2022
 # If the box has internal and external ip's, you can make it only listen on one (like internal)
 ListenAddress 172.16.54.2
@@ -255,7 +256,9 @@ PasswordAuthentication no
 PubkeyAuthentication yes
 # Strict mode makes ssh angry at you if you do things like have bad permissions or ownerships
 StrictMode yes
-# Restricting the ciphers and macs that ssh will support prevents things like attacks that make the client think the server supports lower, broken encryption types, however many of these can break compatibility with certain types of clients, like putty
+# Restricting the ciphers and macs that ssh will support prevents things 
+# like attacks that make the client think the server supports lower, broken encryption types, 
+# however many of these can break compatibility with certain types of clients, like putty
 Ciphers aes256-ctr
 MACs hmac-sha2-512
 ```
@@ -264,7 +267,9 @@ Login hammering mitigation:
 * fail2ban
 
 ```bash
-# Fail2ban stops server hammering by watching the authlogs and if triggered, will initiate mitigations based on the linux firewall system.  The default debian config for jails.conf includes ssh (below) but if you want more restrictive settings you can modify them.
+# Fail2ban stops server hammering by watching the authlogs and if triggered, 
+# will initiate mitigations based on the linux firewall system.  The default debian 
+# config for jails.conf includes ssh (below) but if you want more restrictive settings you can modify them.
 
 [sshd]
 # To use more aggressive sshd modes set filter parameter "mode" in jail.local:
@@ -380,9 +385,7 @@ Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
 Last login: Wed Feb 19 17:15:46 2020 from 172.16.54.1
 ```
 
-## Master connections
-
-## User setup
+## User and port setup
 
 * User switching
 
@@ -418,9 +421,21 @@ Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
 Last login: Wed Feb 19 17:15:17 2020 from 172.16.54.1
 ```
 
-* Keepalive
+* Port switching
+
+If you are using a different port then standard, you will have to tell the ssh client what port you are trying to reach
 
 ## SSH client config
+
+* Control Master connections
+
+Master connections are fantastic ways of utilizing a secured infrastructure where you need to authenticate to a external protection server like a bastion, then spawn connections from there.  If you are not fond of logging in a thousand times to get to different servers, master connections are great!  Examples of it working will be on the SSH Client Config section as that is where I ususally use it, but the -M flag can be used on the command line to invoke it:
+
+![SSH Master Connections](/kb_images/ControlMasterSSH.jpg)
+
+* Keepalive
+
+Keepalive prevents the connection from dying
 
 ## Links
 * YubiKey 2fa:
