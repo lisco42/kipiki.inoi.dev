@@ -11,10 +11,11 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 ## Presentations and Knowledge pages
 
 ### Things I've presented on (projects also parts of this):
-* [Crypto Currencies](/pages/kb/cryptocurrencies.md) - Presentation on the general concepts of Crypto Currencies
+* [SSH](/pages/kb/ssh.md) - Presentation on Secure Shell (SSH)
 * [Lan Party Resources](/pages/kb/lanpartyresources.md) - Resources useful for lan parties like game servers, caching services, and other resources
 * [Scripting Presentation](/pages/kb/scriptingpresentation.md) - Script from my scripting presentation ax JaxLUG
 * [Linux Filesystems](/pages/kb/linuxfilesystems.md) - Presentation on linux filesystems, raid, encryption, ect
+* [Crypto Currencies](/pages/kb/cryptocurrencies.md) - Presentation on the general concepts of Crypto Currencies
 
 ### Good general knowledge pages:
 * [Useful Tools](/pages/kb/usefultools.md) - Tools that are super useful but may not get the lime-light
@@ -24,6 +25,7 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 * [Vim](/pages/kb/vim.md) - Bits of info for vim editor
 * [Scripts](/page/kb/scripts.md) - Random scripts I've created that may be useful to you
 * [Docker](/pages/kb/docker.md) - Containers using docker
+* [FFXIV](/pages/kb/ffxiv.md) - Troubleshooting and various information about the MMO Final Fantasy 14
 
 ## Amateur Radio
 * [Band Info Jacksonville FL](/pages/hamradio/bandinfojax.md) - Band and Repeater information for Ham Radio in and around Jacksonville FL
