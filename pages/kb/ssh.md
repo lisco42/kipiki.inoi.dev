@@ -423,9 +423,25 @@ Last login: Wed Feb 19 17:15:17 2020 from 172.16.54.1
 
 * Port switching
 
-If you are using a different port then standard, you will have to tell the ssh client what port you are trying to reach
+If you are using a different port then standard, you will have to tell the ssh client what port you are trying to reach, you can do that with the -p flag like so:
+
+```
+user01@lug01:~$ ssh -p 2022 172.16.54.2
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64
+ ______________________________
+< Hello user, have a nice day! >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Last login: Wed Feb 19 17:06:26 2020 from 172.16.54.1
+```
 
 ## SSH client config
+
+These are a few choice options that help me work more efficiently that you guys may enjoy
 
 * Control Master connections
 
@@ -433,9 +449,61 @@ Master connections are fantastic ways of utilizing a secured infrastructure wher
 
 ![SSH Master Connections](/kb_images/ControlMasterSSH.jpg)
 
-* Keepalive
+* ServerAliveInterval
 
-Keepalive prevents the connection from dying
+ServerAliveInterval prevents the connection from dying due to being idle.  
+
+If you have a system that is set up to kill dead connections, this is a way to make sure the client keeps in touch with the server while your machine is still active.
+
+* Server naming
+
+You can name servers in your ssh config, even if they do not have dns for ease of access
+
+* User, port, key and other changes
+
+You can put pretty much everything you do on the command line, into the ssh config file, and if you need to connect to the same servers time and again, its a great reasource for all of the settings
+
+* Example of a system set up with the above fun changes
+
+```
+user01@lug01:~$ cat ~/.ssh/config
+Host *
+  ServerAliveInterval 60
+
+Host lug02
+  User jsmith
+  HostName 172.16.54.2
+  Port 2022
+  ControlMaster auto
+  ControlPath ~/.ssh/%C
+  DynamicForward 8080
+```
+
+And using it lets us log in to lug02, automatically as jsmith user, on port 2022, creating a socks tunnel on 8080, and using master so the second connection will just ride the first using multiplexing:
+
+```
+user01@lug01:~$ ssh lug02                                                       
+jsmith@172.16.54.2's password:                                                  
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64          
+ ______________________________                                                 
+< Hello user, have a nice day! >                                                
+ ------------------------------                                                 
+        \   ^__^                                                                
+         \  (oo)\_______                                                        
+            (__)\       )\/\                                                    
+                ||----w |                                                       
+                ||     ||                                                       
+Last login: Wed Feb 19 17:59:34 2020 from 172.16.54.1                           
+$                                                                               
+
+## and on the second connection:
+user01@lug01:~$ ssh lug02
+Last login: Wed Feb 19 18:02:30 2020 from 172.16.54.1
+$ uname -a
+Linux lug02 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64 GNU/Linux
+$ id
+uid=1001(jsmith) gid=1001(jsmith) groups=1001(jsmith)
+```
 
 ## Links
 * YubiKey 2fa:
