@@ -102,14 +102,17 @@ Original contents retained as /home/user01/.ssh/known_hosts.old
 
 ```
 user01@lug01:~$ cat .ssh/known_hosts
-|1|gJ8Ievpj9e7A4C/MCV84j5FPrgM=|bgP//KsWhRs/f6VwmUbtE75Mzho= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0=
+|1|gJ8Ievpj9e7A4C/MCV84j5FPrgM=|bgP//KsWhRs/f6VwmUbtE75Mzho= ecdsa-sha2-nistp256 
+AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO0
+2m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0=
 ```
 
 * Here is the key from the server side (lug02) - public then private (this should go without saying, but private key should never be shared, this is an example machine)
 
 ```
 root@lug02:/etc/ssh# cat ssh_host_ecdsa_key.pub
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64+GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0= root@lug02
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPeWq64
++GAuUV1rfRFXkDBmPDhO02m1f3qAGPvitmo4DKaN2G2BZ10AEfUWxestAgPsjt4nWgIHkMnyg29hDhS0= root@lug02
 root@lug02:/etc/ssh# cat ssh_host_ecdsa_key
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAaAAAABNlY2RzYS
@@ -151,9 +154,9 @@ The key's randomart image is:
 ```
 
 * After you have created your client key, you can then push the public part of that key to servers you have access to and enjoy more-secure access
-  * This action relies on your having password access to the remote server, using a key helps security in two ways
-    * A key will protect your password from MITM attacks since it is based on cryptographic signing
-    * If the server is, after you place the key on it, reconfigured to only accept key access, no password can be used to log in
+* This action relies on your having password access to the remote server, using a key helps security in two ways
+  * A key will protect your password from MITM attacks since it is based on cryptographic signing
+  * If the server is, after you place the key on it, reconfigured to only accept key access, no password can be used to log in
 
 * Pushing the key to a remote server and using it (this key has no password, as an example)
 
