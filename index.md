@@ -23,7 +23,7 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 * [Video Editing on command line](/pages/kb/videocommand.md) - Editing videos on the command line
 * [VirtualBox](/pages/kb/virtualbox.md) - Bits of information reguarding the illustrious Oracle VirtualBox VM Platform
 * [Vim](/pages/kb/vim.md) - Bits of info for vim editor
-* [Scripts](/page/kb/scripts.md) - Random scripts I've created that may be useful to you
+* [Scripts](/pages/kb/scripts.md) - Random scripts I've created that may be useful to you
 * [Docker](/pages/kb/docker.md) - Containers using docker
 * [FFXIV](/pages/kb/ffxiv.md) - Troubleshooting and various information about the MMO Final Fantasy 14
 
