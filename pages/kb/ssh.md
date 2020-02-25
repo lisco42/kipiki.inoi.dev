@@ -518,3 +518,15 @@ uid=1001(jsmith) gid=1001(jsmith) groups=1001(jsmith)
   * https://stribika.github.io/2015/01/04/secure-secure-shell.html
   * https://github.com/stribika/stribika.github.io/wiki/Secure-Secure-Shell
   * https://www.ssh.com/ssh/sshd_config/
+
+## TODO: (things to be added post-presentation)
+Somehow I forgot some of these simple things, some are more complex but forgotten none-the-less, will be removed from this list as they are added:
+* scp
+* sftp
+* piping
+* tar over ssh
+* rsync over ssh
+* dd over ssh
+* gzipping via pipes
+* connect proxy
+* sshuttle (new to me, very cool) - basically vpn over ssh, shown by one of the jaxlug members to me.
