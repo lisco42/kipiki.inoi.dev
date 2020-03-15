@@ -18,7 +18,9 @@ Repeaters, simplex and other band information in and around Jacksonville, FL, US
 * Note: Amateur radios are not licenced for this service as they are licenced under rule 47 CFR Part 97, and FRS is part 95.  This information is provided for informational/emergency purposes only.
 * [Wikipedia article on FRS/GMRS](https://en.wikipedia.org/wiki/Family_Radio_Service)
 * [FCC guidelines for FRS](https://www.fcc.gov/wireless/bureau-divisions/mobility-division/family-radio-service-frs)
+
 (material below pulled from wikipedia)
+
 Channel | Frequency (MHz) | FRS EIRP Restriction | GMRS EIRP Restriction
 --- | --- | --- | ---
 1 | 462.5625 | Up to 2 watt | Up to 5 watts
@@ -48,7 +50,9 @@ Channel | Frequency (MHz) | FRS EIRP Restriction | GMRS EIRP Restriction
 * Note: Amateur radios are not licenced for this service as they are licenced under rule 47 CFR Part 97, and MURS is part 95.  This information is provided for informational/emergency purposes only.
 * [Wikipedia article on MURS](https://en.wikipedia.org/wiki/Multi-Use_Radio_Service)
 * [FCC guidelines on MURS](https://www.fcc.gov/wireless/bureau-divisions/mobility-division/multi-use-radio-service-murs)
+
 (material below pulled from wikipedia)
+
 Channel | Frequency | Maximum authorized bandwidth | Channel name
 --- | --- | --- | ---
 1 | 151.82 MHz | 11.25 kHz | MURS 1
