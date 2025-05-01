@@ -6,7 +6,7 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 
 ## Projects
 * [PortaPi Router](/pages/projects/portapirouter.md) - Portable router and services built using a raspberry pi
-* [Odroid Xu4 PortaLAN](/pages/projects/xu4portalan.md) - More powerful and featureful version of the PortaPi router, fun build, works great, super popular
+* <unavailable, to be rebuilt> [Odroid Xu4 PortaLAN](/pages/projects/xu4portalan.md) - More powerful and featureful version of the PortaPi router, fun build, works great, super popular
 
 ## Presentations and Knowledge pages
 
