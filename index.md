@@ -12,10 +12,10 @@ This site has various bits of projects and knowledge that I'd like to keep out o
 
 ### Things I've presented on (projects also parts of this):
 * [SSH](/pages/kb/ssh.md) - Presentation on Secure Shell (SSH)
-* [Lan Party Resources](/pages/kb/lanpartyresources.md) - Resources useful for lan parties like game servers, caching services, and other resources
-* [Scripting Presentation](/pages/kb/scriptingpresentation.md) - Script from my scripting presentation ax JaxLUG
-* [Linux Filesystems](/pages/kb/linuxfilesystems.md) - Presentation on linux filesystems, raid, encryption, ect
-* [Crypto Currencies](/pages/kb/cryptocurrencies.md) - Presentation on the general concepts of Crypto Currencies
+* <unavailable, to be rebuilt> [Lan Party Resources](/pages/kb/lanpartyresources.md) - Resources useful for lan parties like game servers, caching services, and other resources
+* <unavailable, to be rebuilt> [Scripting Presentation](/pages/kb/scriptingpresentation.md) - Script from my scripting presentation ax JaxLUG
+* <unavailable, to be rebuilt> [Linux Filesystems](/pages/kb/linuxfilesystems.md) - Presentation on linux filesystems, raid, encryption, ect
+* <unavailable, to be rebuilt> [Crypto Currencies](/pages/kb/cryptocurrencies.md) - Presentation on the general concepts of Crypto Currencies
 
 ### Good general knowledge pages:
 * [Useful Tools](/pages/kb/usefultools.md) - Tools that are super useful but may not get the lime-light
