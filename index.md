@@ -1,6 +1,6 @@
 # Welcome to Kipiki
 
-!! The old kipiki (mediawiki) had issues where the hosted front-end stopped updating their certs, and I couldnt get the folks to update them for a few weeks so the rebuild-site is live now, its still WIP, but all the content from the old site will transition over, sorry for the dust !!
+Kipiki is under constrution and getting back into the groove of things!  4/30/25
 
 This site has various bits of projects and knowledge that I'd like to keep out on the internet for my, and hopefully your, usage! Enjoy!
 
